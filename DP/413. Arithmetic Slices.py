@@ -41,3 +41,28 @@ class Solution(object):
         for i in l:
             ans += (i-1)*(i-2)/2
         return ans
+
+    
+class Solution(object):
+    def numberOfArithmeticSlices(self, A):
+        """
+        :type A: List[int]
+        :rtype: int
+        """
+        size = len(A)
+        dp = []
+        for i in range(0,size):
+            dp.append(0)
+        if(size < 3):
+            return 0
+        if(A[2]-A[1] == A[1]-A[0]):
+            dp[2] = 1
+        ans = dp[2]
+        d = A[2]-A[1]
+        for i in range(3,size):
+            if(A[i]-A[i-1] == d):
+                dp[i] = dp[i-1] + 1
+                ans += dp[i]
+            else:
+                d = A[i] - A[i-1]
+        return ans
